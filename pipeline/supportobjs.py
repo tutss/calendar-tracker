@@ -1,4 +1,5 @@
 import dateutil.parser as dup
+from datetime import timedelta
 
 class Event:
     def __init__(self, event: dict) -> None:
@@ -11,6 +12,9 @@ class Event:
     def calculate_event_time(self):
         event_duration = dup.isoparse(self.end_time) - dup.isoparse(self.start_time)
         if event_duration.seconds > 0:
-            self.duration = event_duration
+            self.duration = timedelta_to_hours(event_duration)
         else:
             self.duration = -1
+
+def timedelta_to_hours(td):
+    return td / timedelta(hours=1)

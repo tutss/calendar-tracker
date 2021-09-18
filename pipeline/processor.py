@@ -24,11 +24,12 @@ def build_service():
     # created automatically when the authorization flow completes for the first
     # time.
     if os.path.exists(TOKEN_PATH):
+        print(f'Loading token file... {TOKEN_PATH}')
         creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            creds.refresh(Request()) # TODO: doesn't seem to be working
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 CREDENTIALS_PATH, SCOPES)

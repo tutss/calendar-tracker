@@ -22,7 +22,8 @@ def events_to_df_format(events):
 
 def save_events_to_csv(events):
     now_datetime = datetime.datetime.utcnow()
-    filename = CSV_FOLDER + f"week_d{now_datetime.day}_m{now_datetime.month}.csv"
+    file_id = f"week_d{now_datetime.day}_m{now_datetime.month}.csv"
+    filename = CSV_FOLDER + file_id
 
     event_list = list()
     for event in events:
@@ -33,10 +34,7 @@ def save_events_to_csv(events):
     df.to_csv(filename, index=False)
     print(f'Saved events to {filename}!')
 
-    return filename
-
-def analysis(df):
-    pass
+    return filename, file_id
 
 def load_events(filename):
     df = pd.read_csv(filename)
